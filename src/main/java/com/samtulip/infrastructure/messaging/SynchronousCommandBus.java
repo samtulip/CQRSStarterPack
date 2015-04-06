@@ -56,6 +56,9 @@ public class SynchronousCommandBus implements CommandBus {
         if (handler == null) {
             throw new NullPointerException("Handler should not be null");
         }
+        if( this.handlers.containsKey( handler.getType() ) ) {
+            throw new IllegalArgumentException("Handler for " + handler.getType().getName() + " already registered.");
+        }
         this.handlers.put(handler.getType(), handler);
     }
 

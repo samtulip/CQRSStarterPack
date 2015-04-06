@@ -94,6 +94,15 @@ public class SynchronousCommandBusTest {
         bus.Send( command );
     }
     
+    @Test( expected = IllegalArgumentException.class) 
+    public void testRegisterMultipleHandlers() {
+        SynchronousCommandBus bus = new SynchronousCommandBus();
+        Handler handler = mock(Handler.class);
+        when( handler.getType() ).thenReturn( TestCommand.class );
+        bus.Register( handler );
+        bus.Register( handler );
+    }
+    
     public static class TestCommand implements Command {
         
     }
