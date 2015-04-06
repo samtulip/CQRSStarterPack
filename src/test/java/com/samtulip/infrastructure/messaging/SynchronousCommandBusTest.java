@@ -70,7 +70,39 @@ public class SynchronousCommandBusTest {
         verify( handler ).Handle(command);
     }
     
+    @Test
+    public void testCommand2() {
+        SynchronousCommandBus bus = new SynchronousCommandBus();
+        Handler handler = mock(Handler.class);
+        when( handler.getType() ).thenReturn( TestCommand.class );
+        Handler handler2 = mock(Handler.class);
+        when( handler2.getType() ).thenReturn( TestCommand2.class );
+        bus.Register( handler );
+        bus.Register( handler2 );
+        Command command = new TestCommand2();
+        bus.Send( command );
+        verify( handler2 ).Handle(command);
+    }
+    
+    @Test( expected = UnsupportedOperationException.class)
+    public void testCommand3() {
+        SynchronousCommandBus bus = new SynchronousCommandBus();
+        Handler handler = mock(Handler.class);
+        when( handler.getType() ).thenReturn( TestCommand.class );
+        bus.Register( handler );
+        Command command = new TestCommand3();
+        bus.Send( command );
+    }
+    
     public static class TestCommand implements Command {
+        
+    }
+    
+    public static class TestCommand2 implements Command {
+        
+    }
+    
+    public static class TestCommand3 implements Command {
         
     }
 }
