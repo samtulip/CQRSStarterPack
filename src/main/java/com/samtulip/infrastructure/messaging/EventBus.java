@@ -25,7 +25,7 @@
 package com.samtulip.infrastructure.messaging;
 
 /**
- * An Event but runs published method through all registered handlers capable of
+ * An Event bus runs published method through all registered handlers capable of
  * handling that event.
  * @author Sam Tulip
  */
