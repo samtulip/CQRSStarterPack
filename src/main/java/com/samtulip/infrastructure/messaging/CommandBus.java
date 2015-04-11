@@ -25,11 +25,16 @@
 package com.samtulip.infrastructure.messaging;
 
 /**
- *
+ * A CommandBus takes a sent command and runs it through an applicable handler.
  * @author Sam Tulip
  */
 public interface CommandBus extends HandlerRegistry<Command> {
 
-    <T extends Command> void Send(T command);
+    /**
+     * Sends a command to be executed by a registered handler. 
+     * @param <T> Any object that implements the command interface.
+     * @param command The command to be executed
+     */
+    <T extends Command> void send(T command);
     
 }

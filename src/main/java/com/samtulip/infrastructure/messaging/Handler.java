@@ -31,7 +31,15 @@ package com.samtulip.infrastructure.messaging;
  */
 public interface Handler<T extends Message> {
     
+    /**
+     * Handles a given message.
+     * @param message 
+     */
     void Handle(T message);
     
+    /**
+     * Returns a class representing the type of message this handler can handle.
+     * @return 
+     */
     Class<T> getType();
 }

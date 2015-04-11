@@ -50,13 +50,13 @@ public class SynchronousCommandBusTest {
     @Test( expected = NullPointerException.class )
     public void testNullCommand() {
         SynchronousCommandBus bus = new SynchronousCommandBus();
-        bus.Send( null );
+        bus.send( null );
     }
     
     @Test( expected = UnsupportedOperationException.class )
     public void testUnSupportedCommand() {
         SynchronousCommandBus bus = new SynchronousCommandBus();
-        bus.Send( new TestCommand() );
+        bus.send( new TestCommand() );
     }
     
     @Test
@@ -66,7 +66,7 @@ public class SynchronousCommandBusTest {
         when( handler.getType() ).thenReturn( TestCommand.class );
         bus.Register( handler );
         Command command = new TestCommand();
-        bus.Send( command );
+        bus.send( command );
         verify( handler ).Handle(command);
     }
     
@@ -80,7 +80,7 @@ public class SynchronousCommandBusTest {
         bus.Register( handler );
         bus.Register( handler2 );
         Command command = new TestCommand2();
-        bus.Send( command );
+        bus.send( command );
         verify( handler2 ).Handle(command);
     }
     
@@ -91,7 +91,7 @@ public class SynchronousCommandBusTest {
         when( handler.getType() ).thenReturn( TestCommand.class );
         bus.Register( handler );
         Command command = new TestCommand3();
-        bus.Send( command );
+        bus.send( command );
     }
     
     @Test( expected = IllegalArgumentException.class) 

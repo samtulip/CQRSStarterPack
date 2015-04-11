@@ -38,8 +38,18 @@ public class SynchronousCommandBus implements CommandBus {
         this.handlers = new HashMap<Class, Handler>();
     }
 
+    /**
+     * Sends a command to be executed by a registered handler. Throws an
+     * UnsupportedOperationException if an applicable command handler is not
+     * registered.
+     *
+     * @param <T> Any object that implements the command interface.
+     * @param command The command to be executed
+     * @Throws UnsupportedOperationException if an applicable command handler is
+     * not registered
+     */
     @Override
-    public <T extends Command> void Send(T command) {
+    public <T extends Command> void send(T command) {
         if (command == null) {
             throw new NullPointerException("Command should not be null");
         }
@@ -56,7 +66,7 @@ public class SynchronousCommandBus implements CommandBus {
         if (handler == null) {
             throw new NullPointerException("Handler should not be null");
         }
-        if( this.handlers.containsKey( handler.getType() ) ) {
+        if (this.handlers.containsKey(handler.getType())) {
             throw new IllegalArgumentException("Handler for " + handler.getType().getName() + " already registered.");
         }
         this.handlers.put(handler.getType(), handler);
