@@ -31,5 +31,5 @@ package com.samtulip.infrastructure.messaging;
  */
 public interface HandlerRegistry<T extends Message> {
 
-    void Register(Handler<T> handler);
+    void register(Handler<T> handler);
 }

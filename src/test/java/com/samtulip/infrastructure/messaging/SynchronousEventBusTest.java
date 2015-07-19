@@ -37,7 +37,7 @@ public class SynchronousEventBusTest {
     @Test( expected = NullPointerException.class )
     public void testRegisterNullHandler() {
         SynchronousEventBus bus = new SynchronousEventBus();
-        bus.Register(null);
+        bus.register(null);
     }
     
     @Test
@@ -45,7 +45,7 @@ public class SynchronousEventBusTest {
         SynchronousEventBus bus = new SynchronousEventBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestEvent.class );
-        bus.Register( handler );
+        bus.register( handler );
     }
     
     @Test( expected = NullPointerException.class)
@@ -67,10 +67,10 @@ public class SynchronousEventBusTest {
         SynchronousEventBus bus = new SynchronousEventBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestEvent.class );
-        bus.Register( handler );
+        bus.register( handler );
         Event event = new TestEvent();
         bus.publish(event);
-        verify(handler).Handle(event);
+        verify(handler).handle(event);
     }
     
     @Test
@@ -78,14 +78,14 @@ public class SynchronousEventBusTest {
         SynchronousEventBus bus = new SynchronousEventBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestEvent.class );
-        bus.Register( handler );
+        bus.register( handler );
         Handler handler2 = mock(Handler.class);
         when( handler2.getType() ).thenReturn( TestEvent.class );
-        bus.Register( handler2 );
+        bus.register( handler2 );
         Event event = new TestEvent();
         bus.publish(event);
-        verify(handler).Handle(event);
-        verify(handler2).Handle(event);
+        verify(handler).handle(event);
+        verify(handler2).handle(event);
     }
     
     @Test
@@ -93,14 +93,14 @@ public class SynchronousEventBusTest {
         SynchronousEventBus bus = new SynchronousEventBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestEvent.class );
-        bus.Register( handler );
+        bus.register( handler );
         Handler handler2 = mock(Handler.class);
         when( handler2.getType() ).thenReturn( TestEvent2.class );
-        bus.Register( handler2 );
+        bus.register( handler2 );
         Event event = new TestEvent();
         bus.publish(event);
-        verify(handler).Handle(event);
-        verify(handler2, never()).Handle(event);
+        verify(handler).handle(event);
+        verify(handler2, never()).handle(event);
     }
     
     public static class TestEvent implements Event {

@@ -48,13 +48,13 @@ public class SynchronousEventBus implements EventBus {
         final List<Handler<Event>> eventHandlers = this.handlers.get(event.getClass());
         if (eventHandlers != null) {
             for (final Handler handler : eventHandlers) {
-                handler.Handle(event);
+                handler.handle(event);
             }
         }
     }
 
     @Override
-    public void Register(Handler<Event> handler) {
+    public void register(Handler<Event> handler) {
         if (handler == null) {
             throw new NullPointerException("Handler should not be null");
         }

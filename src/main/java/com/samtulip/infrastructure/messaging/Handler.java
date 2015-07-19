@@ -35,7 +35,7 @@ public interface Handler<T extends Message> {
      * Handles a given message.
      * @param message 
      */
-    void Handle(T message);
+    void handle(T message);
     
     /**
      * Returns a class representing the type of message this handler can handle.

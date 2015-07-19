@@ -55,14 +55,14 @@ public class SynchronousCommandBus implements CommandBus {
         }
         final Handler<T> handler = this.handlers.get(command.getClass());
         if (handler != null) {
-            handler.Handle(command);
+            handler.handle(command);
         } else {
             throw new UnsupportedOperationException("No handler found for command " + command.getClass().getName());
         }
     }
 
     @Override
-    public void Register(Handler<Command> handler) {
+    public void register(Handler<Command> handler) {
         if (handler == null) {
             throw new NullPointerException("Handler should not be null");
         }

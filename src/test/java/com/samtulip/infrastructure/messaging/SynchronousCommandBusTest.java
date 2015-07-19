@@ -36,7 +36,7 @@ public class SynchronousCommandBusTest {
     @Test( expected = NullPointerException.class )
     public void testNullHandler() {
         SynchronousCommandBus bus = new SynchronousCommandBus();
-        bus.Register(null);
+        bus.register(null);
     }
     
     @Test
@@ -44,7 +44,7 @@ public class SynchronousCommandBusTest {
         SynchronousCommandBus bus = new SynchronousCommandBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestCommand.class );
-        bus.Register( handler );
+        bus.register( handler );
     }
     
     @Test( expected = NullPointerException.class )
@@ -64,10 +64,10 @@ public class SynchronousCommandBusTest {
         SynchronousCommandBus bus = new SynchronousCommandBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestCommand.class );
-        bus.Register( handler );
+        bus.register( handler );
         Command command = new TestCommand();
         bus.send( command );
-        verify( handler ).Handle(command);
+        verify( handler ).handle(command);
     }
     
     @Test
@@ -77,11 +77,11 @@ public class SynchronousCommandBusTest {
         when( handler.getType() ).thenReturn( TestCommand.class );
         Handler handler2 = mock(Handler.class);
         when( handler2.getType() ).thenReturn( TestCommand2.class );
-        bus.Register( handler );
-        bus.Register( handler2 );
+        bus.register( handler );
+        bus.register( handler2 );
         Command command = new TestCommand2();
         bus.send( command );
-        verify( handler2 ).Handle(command);
+        verify( handler2 ).handle(command);
     }
     
     @Test( expected = UnsupportedOperationException.class)
@@ -89,7 +89,7 @@ public class SynchronousCommandBusTest {
         SynchronousCommandBus bus = new SynchronousCommandBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestCommand.class );
-        bus.Register( handler );
+        bus.register( handler );
         Command command = new TestCommand3();
         bus.send( command );
     }
@@ -99,8 +99,8 @@ public class SynchronousCommandBusTest {
         SynchronousCommandBus bus = new SynchronousCommandBus();
         Handler handler = mock(Handler.class);
         when( handler.getType() ).thenReturn( TestCommand.class );
-        bus.Register( handler );
-        bus.Register( handler );
+        bus.register( handler );
+        bus.register( handler );
     }
     
     public static class TestCommand implements Command {
